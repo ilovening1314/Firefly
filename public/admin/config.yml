@@ -1,0 +1,48 @@
+# Decap CMS 配置文件
+# 详细文档：https://decapcms.org/docs/configuration-options/
+
+# ===== 后端配置 =====
+backend:
+  name: github
+  repo: 你的GitHub用户名/你的仓库名   # ← 改成你自己的！
+  branch: main                        # ← 改成你的默认分支名（main 或 master）
+  base_url: https://你的Worker地址    # ← 改成你的 Cloudflare Worker 地址
+  auth_endpoint: authorize            # 对应 Worker 里的 /authorize 路径
+
+# 发布模式：simple = 直接提交，不使用 PR 流程
+publish_mode: simple
+
+# 本地开发时设为 true，可以用本地 Git 后端（不需要 GitHub OAuth）
+local_backend: false
+
+# 媒体文件（图片）存放位置
+media_folder: "/images/posts"    # 在仓库里的路径
+public_folder: "/images/posts"   # 在 Markdown 里引用的路径前缀
+
+# ===== 内容集合配置 =====
+collections:
+  - name: "posts"               # 内部名称，不能含中文
+    label: "文章"                # 在 CMS 界面上显示的名称
+    label_singular: "文章"       # 单篇文章的显示名称
+    folder: "src/content/posts"  # ← 改成你的文章实际存放目录！
+    nested:
+      depth: 5                   # 递归扫描 5 层子目录（支持子文件夹里的文章）
+    create: true                 # 允许在 CMS 里新建文章
+    slug: "{{slug}}"           # 新文章的文件名格式（使用标题的 slug）
+
+    # ===== 文章字段定义 =====
+    # 这些字段对应你 Markdown 文件里 --- 之间的 frontmatter
+    fields:
+      - { name: "title", label: "标题", widget: "string", required: true }
+      - { name: "date", label: "日期", widget: "datetime", format: "yyyy-MM-dd", required: true }
+      - { name: "tags", label: "标签", widget: "list" }
+      - name: "category"
+        label: "分类"
+        widget: "select"
+        options:
+          - "技术笔记"
+          - "生活随笔"
+          - "学习记录"
+        required: false
+      - { name: "description", label: "摘要", widget: "string", required: false }
+      - { name: "body", label: "正文", widget: "markdown", required: true }
