@@ -4,7 +4,7 @@
 # ===== 后端配置 =====
 backend:
   name: github
-  repo: liangzhanning1-spec/Firefly   # ← 改成你自己的！
+  repo: ilovening1314/Firefly   # ← 改成你自己的！
   branch: master                        # ← 改成你的默认分支名（main 或 master）
   base_url: https://firefly-cms-oauth.ningnb123.workers.dev    # ← 改成你的 Cloudflare Worker 地址
   auth_endpoint: src/content/posts            # 对应 Worker 里的 /authorize 路径
