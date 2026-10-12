@@ -34,7 +34,7 @@ collections:
     # 这些字段对应你 Markdown 文件里 --- 之间的 frontmatter
     fields:
       - { name: "title", label: "标题", widget: "string", required: true }
-      - { name: "date", label: "日期", widget: "datetime", format: "yyyy-MM-dd", required: true }
+      - { name: "date", label: "日期", widget: "datetime", format: "YYYY-MM-DD", required: true }
       - { name: "tags", label: "标签", widget: "list" }
       - name: "category"
         label: "分类"
